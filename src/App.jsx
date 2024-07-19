@@ -1,9 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Nav from "./components/Nav"
+import News from "./components/News";
 
 const App=()=>{
   return(
     <>
-      <h1 className="font-bold text-3xl text-red-500 underline">Hello World</h1>
+      <Routes>
+        <Route path="/" element={<Nav/>}>
+          <Route index element={<News />}/>
+        </Route>
+      </Routes>
     </>
   )
 }
