@@ -12,6 +12,15 @@ export default {
         customYellow: '#f59e0b',
         customLiteBlue: '#54afff',
         customDarkBlue: '#428eff',
+        
+        customCardRed: "#f56042",
+        customCardGreen: "#3ef757",
+        customCardBlue: "#3e82f7",
+        customCardViolet: "#3e57f7",
+        customCardYellow: "#f7db3e",
+        customCardOrange: "#f7973e",
+
+
       }
     },
   },
