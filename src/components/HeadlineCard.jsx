@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion"
+
 
 const HeadlineCard = ({ data, colour }) => {
     const [cardColor, setCardColor]=useState(colour[0])
     useEffect(()=>{
         setCardColor(colour[Math.ceil(Math.random()*(5))])
     },[])
-    console.log(colour[Math.ceil(Math.random()*(5))])
+   
   return (
     <>
-        
-        <div>
+        <motion.div
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
+            transition={{ duration: 0.5 }}
+        >
             {/* <div className="h-[25vmax] w-[92vw] sm:mx-[3vmax] sm:h-[37vmax] sm:w-[92vw] bg-[#3b7fcc] rounded absolute"> */}
             {/* colour[Math.ceil(Math.random(0,6))] */}
             <div className={`h-[25vmax] w-[92vw] sm:mx-[3vmax] sm:h-[37vmax] sm:w-[92vw] bg-${"customCardOrange"} rounded absolute`} style={{backgroundColor: `${colour[Math.ceil(Math.random()*(colour.length-1))]}`}}>
@@ -30,7 +35,7 @@ const HeadlineCard = ({ data, colour }) => {
                 </div>
             </div>
 
-        </div>
+        </motion.div>
     </>
   );
 };

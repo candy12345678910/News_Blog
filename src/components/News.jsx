@@ -1,31 +1,40 @@
 import React, { useContext, useEffect, useState } from "react";
 import HeadlineCard from "./HeadlineCard";
+import Head from "./Head";
+import GeneralNews from "./GeneralNews";
 import OtherNews from "./OtherNews";
 import { MyContext } from "../contextApi";
-
+import { Buisness } from "../buisness";
+import { General } from "./General";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 const News=()=>{
-    // const colour=["customCardRed","customCardGreen","customCardBlue","customCardViolet","customCardYellow","customCardOrange"]
-    const colour=["#f56042","#3e82f7","#3e57f7","#f7973e"]
-    const { count,headlines }=useContext(MyContext)
+
+    const { headlines, colour, entertainment, sports, general }=useContext(MyContext)
 
     const [shift, setshift]=useState(0)
     const [end, setEnd]=useState(0)
-    // console.log(headlines.data.articles)
     useEffect(()=>{
         if(headlines){
-            setEnd(headlines.Headline.articles.length)
-            console.log(headlines.Headline.articles.length)
+           
+            // it is for API
+            // setEnd(headlines.data.articles.length)
+            // console.log(headlines.data.articles.length)
+
+            //it is for testing
+            // setEnd(headlines.Headline.articles.length)
+            
+            // console.log(headlines.Headline.articles.length)
         }
     },[headlines])
 
-    if(headlines){
-        // setNews(headlines.Headline.articles)
-        // console.log(headlines.Headline.articles)
-        // console.log(headlines.Headline.articles.length)
-    }
+    // if(headlines){
+    //     // setNews(headlines.Headline.articles)
+    //     // console.log(headlines.Headline.articles)
+    //     // console.log(headlines.Headline.articles.length)
+    // }
+
     // setInterval(()=>{
     //     setshift((shift+1)%end)
     // },4000)
@@ -44,12 +53,21 @@ const News=()=>{
  
     return(
         <>
-            <div className="flex flex-col items-center bg-[#c4cde4] h-[auto] py-[1vmax]">
-            
-                <div className="relative">
+            <div className="flex flex-col gap-6 items-center bg-[#c4cde4] h-[auto] py-[1vmax] overflow-hidden">
+
+                {/* <Head Data={ headlines } colour={ colour } /> */}
+                {
+                    headlines?<Head Data={ headlines } colour={ colour } />:<></>
+                }
+                
+                {/* <div className="relative">
                     <div className="relative">
-                        {
-                            headlines ? <HeadlineCard data={ headlines.Headline.articles[shift] } colour={colour} /> : <p>Loading</p>
+                        {   
+                            // it is for the api
+                            headlines ? <HeadlineCard data={ headlines[shift] } colour={colour} /> : <p>Loading</p>
+
+                            // it is for testing
+                            // headlines ? <HeadlineCard data={ headlines.Headline.articles[shift] } colour={colour} /> : <p>Loading</p>
                         }
                     </div>
                     <div className="absolute top-0 left-0 w-full h-full">
@@ -58,10 +76,21 @@ const News=()=>{
                             <IoIosArrowForward className="bg-[#00000054] text-[#d3d3d3] text-[4vmax] hover:cursor-pointer p-[5] sm:bg-[#000000e1] rounded" onClick={goRight}/>
                         </div>
                     </div>
-                </div>
-
-                <OtherNews/>                
-
+                </div> */}
+                
+                {/* <GeneralNews Data={ General.articles }/> */}
+                
+                {
+                    general?<GeneralNews Data={ general[1] }/>:<></>
+                }
+                <OtherNews Name={"Buisness"} Data={Buisness.articles} /> 
+                {
+                    entertainment?<OtherNews Name={entertainment[0]} Data={entertainment[1]} />:<></>
+                }
+                
+                {
+                    sports?<OtherNews Name={sports[0]} Data={sports[1]} />:<></>
+                }
             </div>
         </>
     )

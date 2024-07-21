@@ -9,7 +9,9 @@ export default {
       colors:{
         darkBack: '#000517',
         liteBack: '#1E293B',
+        
         customYellow: '#f59e0b',
+        customYellow2: "#FFA600",
         customLiteBlue: '#54afff',
         customDarkBlue: '#428eff',
         

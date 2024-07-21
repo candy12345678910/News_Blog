@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 
+import OtherNewsCard from "./OtherNewsCard";
 
-const OtherNews =()=>{
+
+const OtherNews =({Name, Data})=>{
     var settings = {
         dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         initialSlide: 3,
         autoplay: true,
         autoplaySpeed: 2000,
@@ -33,29 +35,43 @@ const OtherNews =()=>{
           {
             breakpoint: 480,
             settings: {
-              slidesToShow: 1,
+              slidesToShow: 2,
               slidesToScroll: 1
             }
           }
         ]
       };
-    const a=[1,2,3,4,5]
-    return(
+    
+    const [data, setData]=useState(null)
+    useEffect(()=>{
+      if(Data){
+        setData(Data)
+        console.log(data)
+      }
+    },[])
 
-        <div className="h-[auto] w-[100vw] m-[20px] p-[3vmax]">
+    return(
+      <>
+        <div className=" flex flex-col items-start">
+          <p className=" px-[1vmax] bg-liteBack font-medium text-white text-[1.7vmax] rounded-tr-lg">{Name}</p>
+          <div className="h-[.4vmax] w-[92vw] bg-liteBack"></div>
+        </div>
+
+        {
+          data?
+          <div className="h-[auto] w-[100vw] px-[3.5vmax]">
             <Slider {...settings}>
                 {
-                    a.map((i)=>{
+                    data.map((i,_)=>{
                         return(
-                            <div className="h-[50vh] w-[100vw] bg-slate-400 px-[10px] flex flex-col items-center justify-center rounded-full">
-                                <p className="text-red text-center font-bold">{i}</p>
-                                <p className="text-red text-center font-bold">Testing {i}</p>
-                            </div>
+                          <OtherNewsCard key={_} data={ i }/>
                         )
                     })
                 }
             </Slider>
-        </div>
+          </div>:<></>
+        }
+      </>
     )
 }
 
