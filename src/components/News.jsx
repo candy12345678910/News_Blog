@@ -78,7 +78,7 @@ const News=()=>{
                     </div>
                 </div> */}
                 
-                {/* <GeneralNews Data={ General.articles }/> */}
+                <GeneralNews Data={ General.articles }/>
                 
                 {
                     general?<GeneralNews Data={ general[1] }/>:<></>
