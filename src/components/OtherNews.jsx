@@ -21,7 +21,15 @@ const OtherNews =({Name, Data})=>{
               slidesToShow: 5,
               slidesToScroll: 3,
               infinite: true,
-              dots: true
+              dots: false
+            }
+          },
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2
             }
           },
           {
@@ -46,7 +54,6 @@ const OtherNews =({Name, Data})=>{
     useEffect(()=>{
       if(Data){
         setData(Data)
-        console.log(data)
       }
     },[])
 

@@ -1,31 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import HeadlineCard from "./HeadlineCard";
+// import HeadlineCard from "./HeadlineCard";
 import Head from "./Head";
 import GeneralNews from "./GeneralNews";
 import OtherNews from "./OtherNews";
 import { MyContext } from "../contextApi";
 import { Buisness } from "../buisness";
 import { General } from "./General";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowBack } from "react-icons/io";
+// import { IoIosArrowForward } from "react-icons/io";
 
 const News=()=>{
 
-    const { headlines, colour, buisness, entertainment, sports, general }=useContext(MyContext)
+    const { headlines, colour, general, business, sports, entertainment, health, science, technology }=useContext(MyContext)
 
     const [shift, setshift]=useState(0)
     const [end, setEnd]=useState(0)
     useEffect(()=>{
         if(headlines){
-           
-            // it is for API
-            // setEnd(headlines.data.articles.length)
-            // console.log(headlines.data.articles.length)
-
-            //it is for testing
-            // setEnd(headlines.Headline.articles.length)
-            
-            // console.log(headlines.Headline.articles.length)
+        //  console.log(buisness)  
         }
     },[headlines])
 
@@ -53,7 +45,7 @@ const News=()=>{
  
     return(
         <>
-            <div className="flex flex-col gap-6 items-center bg-[#c4cde4] h-[auto] py-[1vmax] overflow-hidden">
+            <div className="flex flex-col gap-6 items-center bg-[#c4cde4] h-[auto] pt-[1vmax] pb-[5vmax] overflow-hidden">
 
                 {/* <Head Data={ headlines } colour={ colour } /> */}
                 {
@@ -85,15 +77,30 @@ const News=()=>{
                 }
                 
                 <OtherNews Name={"Buisness"} Data={Buisness.articles} /> 
+                
+                {/* business */}
                 {
-                    entertainment?<OtherNews Name={buisness[0]} Data={buisness[1]} />:<></>
+                    entertainment?<OtherNews Name={business[0]} Data={business[1]} />:<></>
                 }
+
+                {/* EnterTainment */}
                 {
                     entertainment?<OtherNews Name={entertainment[0]} Data={entertainment[1]} />:<></>
                 }
                 
+                {/* Sports */}
                 {
                     sports?<OtherNews Name={sports[0]} Data={sports[1]} />:<></>
+                }
+
+                {/* Science */}
+                {
+                    sports?<OtherNews Name={science[0]} Data={science[1]} />:<></>
+                }
+
+                {/* Technology */}
+                {
+                    sports?<OtherNews Name={technology[0]} Data={technology[1]} />:<></>
                 }
             </div>
         </>

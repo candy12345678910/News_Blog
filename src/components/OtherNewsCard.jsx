@@ -6,7 +6,7 @@ const OtherNewsCard = ( { data } ) => {
     return (
         <>
             <a href={data.url}>
-                <div className='bg-customCardOrange h-[45vmin] flex flex-col mx-[.4vmax] sm:h-[45vh] rounded relative'>
+                <div className='bg-customCardOrange h-[45vmin] flex flex-col mx-[.4vmax] sm:h-[45vh] md:h-[35vmin] lg-[45vmin] rounded relative'>
                     {
                         data.urlToImage?<img className="h-[45vh] sm:h-[45vh] rounded" src={data.urlToImage} relative/>:
                         <div className='h-[45vh] sm:h-[45vh] rounded relative' style={{ backgroundColor: `${colour[Math.ceil(Math.random()*colour.length-1)]}` }}>
