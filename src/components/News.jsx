@@ -11,7 +11,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const News=()=>{
 
-    const { headlines, colour, entertainment, sports, general }=useContext(MyContext)
+    const { headlines, colour, buisness, entertainment, sports, general }=useContext(MyContext)
 
     const [shift, setshift]=useState(0)
     const [end, setEnd]=useState(0)
@@ -83,7 +83,11 @@ const News=()=>{
                 {
                     general?<GeneralNews Data={ general[1] }/>:<></>
                 }
+                
                 <OtherNews Name={"Buisness"} Data={Buisness.articles} /> 
+                {
+                    entertainment?<OtherNews Name={buisness[0]} Data={buisness[1]} />:<></>
+                }
                 {
                     entertainment?<OtherNews Name={entertainment[0]} Data={entertainment[1]} />:<></>
                 }
