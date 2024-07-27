@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import axios from "axios"
-import Headline from "./components/Headline"
+// import Headline from "./components/Headline"
 
 export const MyContext=createContext()
 

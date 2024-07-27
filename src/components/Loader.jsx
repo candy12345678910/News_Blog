@@ -1,9 +1,11 @@
 import React from "react";
+import "../index.css"
 
 const Loader=()=>{
     return(
-        <>
-        </>
+        <div className="h-[100vh] bg-[#050411ea] flex justify-center items-center">
+            <span className="loader"></span>
+        </div>
     )
 }
 

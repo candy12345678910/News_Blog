@@ -1,19 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { MyContext } from "../contextApi";
 import { motion } from "framer-motion";
+
 
 const Search=()=>{
     const [text, setText]=useState('')
     const { search,setSearch }=useContext(MyContext)
-    console.log(search)
-    
+    const navigate=useNavigate()
     const handleSearch=()=>{
         setText(text.toLowerCase())
         if(text=='' || text==search){
             alert("Searchbar is empty")
         }
         else{
-            setSearch(text)            
+            navigate(`/search/${text}`)
         }
     }
 

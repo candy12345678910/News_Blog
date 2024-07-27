@@ -13,7 +13,7 @@ const OtherNews =({Name, Data})=>{
         slidesToScroll: 1,
         initialSlide: 3,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 3000,
         responsive: [
           {
             breakpoint: 1024,

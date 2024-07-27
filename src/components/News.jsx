@@ -6,6 +6,7 @@ import OtherNews from "./OtherNews";
 import { MyContext } from "../contextApi";
 import { Buisness } from "../buisness";
 import { General } from "./General";
+import Loader from "./Loader";
 // import { IoIosArrowBack } from "react-icons/io";
 // import { IoIosArrowForward } from "react-icons/io";
 
@@ -44,7 +45,9 @@ const News=()=>{
     }
  
     return(
-        <>
+        <> {
+            headlines?
+
             <div className="flex flex-col gap-6 items-center bg-[#c4cde4] h-[auto] pt-[1vmax] pb-[5vmax] overflow-hidden">
 
                 {/* <Head Data={ headlines } colour={ colour } /> */}
@@ -70,17 +73,22 @@ const News=()=>{
                     </div>
                 </div> */}
                 
-                <GeneralNews Data={ General.articles }/>
+                {/* <GeneralNews Data={ General.articles }/> */}
                 
                 {
                     general?<GeneralNews Data={ general[1] }/>:<></>
                 }
                 
-                <OtherNews Name={"Buisness"} Data={Buisness.articles} /> 
+                {/* <OtherNews Name={"Buisness"} Data={Buisness.articles} />  */}
                 
                 {/* business */}
                 {
-                    entertainment?<OtherNews Name={business[0]} Data={business[1]} />:<></>
+                    business?<OtherNews Name={business[0]} Data={business[1]} />:<></>
+                }
+                
+                {/* health */}
+                {
+                    health?<OtherNews Name={health[0]} Data={health[1]} />:<></>
                 }
 
                 {/* EnterTainment */}
@@ -95,14 +103,17 @@ const News=()=>{
 
                 {/* Science */}
                 {
-                    sports?<OtherNews Name={science[0]} Data={science[1]} />:<></>
+                    science?<OtherNews Name={science[0]} Data={science[1]} />:<></>
                 }
 
                 {/* Technology */}
                 {
-                    sports?<OtherNews Name={technology[0]} Data={technology[1]} />:<></>
+                    technology?<OtherNews Name={technology[0]} Data={technology[1]} />:<></>
                 }
             </div>
+
+            :<Loader />
+            }
         </>
     )
 }
