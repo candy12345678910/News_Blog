@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom"
+import { Link, NavLink, Outlet } from "react-router-dom"
 import { LuUserCircle2 } from "react-icons/lu";
 import { FiAlignJustify } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
@@ -15,14 +15,14 @@ const Nav=()=>{
         <>
             <div className="flex flex-row py-[.8vmax] px-[3vmax] bg-darkBack justify-between items-center">
                 <NavLink to="/">
-                    <h1 className="text-white font-bold text-[2vmax]">NewsBlog</h1>
+                    <h1 className="text-white font-bold text-[2vmax]">News<span className="text-customLiteBlue">Blog</span></h1>
                 </NavLink>
 
 
                 <div className="flex flex-row gap-[5vmax]">
                     <NavLink to="/" className={({isActive})=>`text-[1.4vmax] font-bold cursor-pointer ${isActive?"text-customLiteBlue":"text-[#bfcdde]"}`}>News</NavLink>
                     
-                    <NavLink to="/lock" className={({isActive})=>`text-[1.4vmax] font-bold cursor-pointer ${isActive?"text-customLiteBlue":"text-[#bfcdde]"}`}>Blog</NavLink>
+                    <NavLink to="/blog" className={({isActive})=>`text-[1.4vmax] font-bold cursor-pointer ${isActive?"text-customLiteBlue":"text-[#bfcdde]"}`}>Blog</NavLink>
                 </div>
                 
                 <div className="flex flex-row gap-4">
@@ -33,13 +33,13 @@ const Nav=()=>{
                         }
                         
                     </div>
-
-                    <div className="p-[.7vmax] gap-2 rounded-[1vmax] bg-[#6d6d6d86] flex flex-row hover: cursor-pointer  hover:bg-[#ffffff69] hover: transition duration-300" onClick={()=>setProfileToggle(!profileToggle)}>
-                        <LuUserCircle2 className="text-white size-[2vmax]"/> 
-                        {
-                            profileToggle?<RxCross2 className="text-white size-[2vmax]"/>:<FiAlignJustify className="text-white size-[2vmax]"/>}
-                    </div>
-
+                    <NavLink to="/login">
+                        <div className="p-[.7vmax] gap-2 rounded-[1vmax] bg-[#6d6d6d86] flex flex-row hover: cursor-pointer  hover:bg-[#ffffff69] hover: transition duration-300" onClick={()=>setProfileToggle(!profileToggle)}>
+                            <LuUserCircle2 className="text-white size-[2vmax]"/> 
+                            {/* {
+                                profileToggle?<RxCross2 className="text-white size-[2vmax]"/>:<FiAlignJustify className="text-white size-[2vmax]"/>} */}
+                        </div>
+                    </NavLink>
                 </div>
 
             </div>

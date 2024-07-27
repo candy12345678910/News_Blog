@@ -3,7 +3,7 @@ import "../index.css"
 
 const Loader=()=>{
     return(
-        <div className="h-[100vh] bg-[#050411ea] flex justify-center items-center">
+        <div className="h-[100vh] bg-[#111725] flex justify-center items-center">
             <span className="loader"></span>
         </div>
     )
