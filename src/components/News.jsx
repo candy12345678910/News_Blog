@@ -7,15 +7,17 @@ import { MyContext } from "../contextApi";
 import { Buisness } from "../buisness";
 import { General } from "./General";
 import Loader from "./Loader";
+import { BiSolidErrorAlt } from "react-icons/bi";
 // import { IoIosArrowBack } from "react-icons/io";
 // import { IoIosArrowForward } from "react-icons/io";
 
 const News=()=>{
 
-    const { headlines, colour, general, business, sports, entertainment, health, science, technology }=useContext(MyContext)
+    const { headlines, colour, general, business, sports, entertainment, health, science, technology, error }=useContext(MyContext)
 
     const [shift, setshift]=useState(0)
     const [end, setEnd]=useState(0)
+    console.log(error)
     useEffect(()=>{
         if(headlines){
         //  console.log(buisness)  
@@ -43,9 +45,19 @@ const News=()=>{
     const goRight=()=>{
         setshift((shift+1)%end)
     }
- 
+    if(error){
+        return(
+            <>
+                <div className='flex flex-col bg-liteBack h-[100vh] gap-6 justify-center items-center p-[3max] '>
+                    <BiSolidErrorAlt className='text-zinc-50 text-[20vmin]'/>
+                    <p className='text-zinc-50 text-[1.6vmax] font-semibold'>Request limit reached</p>
+                </div>
+            </> 
+        )
+    }
     return(
-        <> {
+        <> 
+        {
             headlines?
 
             <div className="flex flex-col gap-6 items-center bg-[#c4cde4] h-[auto] pt-[1vmax] pb-[5vmax] overflow-hidden">
@@ -112,7 +124,7 @@ const News=()=>{
                 }
             </div>
 
-            :<Loader />
+             :<Loader />
             }
         </>
     )

@@ -8,7 +8,7 @@ export const ContextPorovider=({ children })=>{
 
     const [search, setSearch]=useState('')
     const colour=["#f56042","#3e82f7","#3e57f7","#f7973e"]
-    
+    const [error, setError]=useState(false)
     const [headlines, setHeadline]=useState(null)
     const [general,setGeneral]=useState(null)
     const [business,setBuisness]=useState(null)
@@ -58,7 +58,10 @@ export const ContextPorovider=({ children })=>{
                 setScience([ "Science", six])
                 setTechnology([ "Technology", seven])
             })
-        ).catch(err=>console.log("Error occured= "+err))
+        ).catch(err=>{
+            console.log("Error occured= "+err)
+            setError(true)
+        })
 
     }
 
@@ -116,7 +119,7 @@ export const ContextPorovider=({ children })=>{
     },[])
 
     return(
-        <MyContext.Provider value={{ headlines, search, setSearch, colour, general, business, sports, entertainment, health, science, technology }}>
+        <MyContext.Provider value={{ headlines, search, setSearch, colour, general, business, sports, entertainment, health, science, technology, error }}>
             { children }
         </MyContext.Provider>
     )
