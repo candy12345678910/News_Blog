@@ -21,12 +21,14 @@ function Login() {
 
     return (
         <>
-        <div className='bg-[#111725] h-[100vh] flex flex-col gap-3 justify-center items-center'>
-
-            <div className='w-[50vw] h-auto bg-[#02030e57] p-[3vmax] rounded-[3vm] flex flex-col gap-5 justify-center items-center'>
+        <div className='bg-[#111725] h-screen flex flex-col gap-3 justify-center items-center'>
+            
                 <p className='text-[2.3vmax] font-medium text-[white]'>Login</p>
 
-                <form method='post' className="w-full flex flex-col gap-5" onSubmit={handelLogin}>
+            <div className='overflow-hidden w-[50vw] h-auto bg-[#02030e57] rounded-md flex flex-row gap-5 justify-center items-center'>
+                <img className="hidden md:block w-[25%] h-[100%] " src="https://images.pexels.com/photos/1106476/pexels-photo-1106476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="profile"/>
+
+                <form method='post' className="w-full flex flex-col gap-5 p-[3vmax]" onSubmit={handelLogin}>
                         <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type="text" placeholder='Email' name="email"/>
                         <div className='flex flex-row items-center gap-1'>
                             <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type={hide?"password":"text"} placeholder='Password' name="password"/>
@@ -37,8 +39,8 @@ function Login() {
                 </form>
 
 
-                <p className='text-zinc-50 text-[1vmax] hover:cursor-pointer'>Not an User? <span className='text-customLiteBlue font-medium' onClick={()=>navigate("/register")}>Register</span></p>
             </div>
+                <p className='text-zinc-50 text-[1vmax] hover:cursor-pointer'>Not an User? <span className='text-customLiteBlue font-medium' onClick={()=>navigate("/register")}>Register</span></p>
 
         </div>
         </>
