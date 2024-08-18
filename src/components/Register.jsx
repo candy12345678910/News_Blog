@@ -15,7 +15,6 @@ function Register() {
 
     const handleSubmit=async (e)=>{
         e.preventDefault()
-
         try{
             const res=await axios.post(import.meta.env.VITE_BACKEND_DATABASE+"/register",{
                 name,
@@ -60,11 +59,11 @@ function Register() {
                             <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type={hide?"password":"text"} placeholder='Confirm password' name="password"/>
                             <p className="text-[1.3vmax] text-zinc-50" onClick={()=>setHide(!hide)}>{hide?<BiSolidHide/>:<BiSolidShow/>}</p>
                         </div>
-                        <button className='transition duration-375 w-full text-[#ffffff] text-[1.3vmax] font-medium px-[1.1vmax] py-[.5vmax] bg-customLiteBlue rounded-md hover:bg-[#1c3074]'>Register</button>
+                        <button className='transition duration-375 w-full text-[#ffffff] text-[1.3vmax] font-medium px-[1.1vmax] py-[.5vmax] bg-[#233c91] rounded-md hover:bg-[#111d47] hover:text-[#9daedb]'>Register</button>
                 </form>
             </div>
             <p className='text-zinc-50 text-[1vmax] hover:cursor-pointer'>Already an User? <span className='text-customLiteBlue font-medium' onClick={()=>navigate("/login")}>Login</span></p>
-
+            <button className='text-zinc-50 px-[1vmax] py-[.3vmax] font-medium text-[1.3vmax] bg-[#233c91] rounded-md hover:bg-[#111d47] hover:text-[#9daedb]'>Go to Home</button>
         </div>
         </>
     )

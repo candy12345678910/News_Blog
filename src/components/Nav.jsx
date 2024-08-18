@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom"
+import axios from "axios"
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { LuUserCircle2 } from "react-icons/lu";
 import { FiAlignJustify } from "react-icons/fi";
 import { IoSearch } from "react-icons/io5";
@@ -8,6 +9,8 @@ import { RxCross2 } from "react-icons/rx";
 import Search from "./Search";
 
 const Nav=()=>{
+    
+    const location=useLocation()
 
     const [searchToggle, setSearchToggle]=useState(false)
     const [profileToggle, setProfileToggle]=useState(false)
@@ -33,13 +36,16 @@ const Nav=()=>{
                         }
                         
                     </div>
-                    <NavLink to="/login">
-                        <div className="p-[.7vmax] gap-2 rounded-[1vmax] bg-[#6d6d6d86] flex flex-row hover: cursor-pointer  hover:bg-[#ffffff69] hover: transition duration-300" onClick={()=>setProfileToggle(!profileToggle)}>
-                            <LuUserCircle2 className="text-white size-[2vmax]"/> 
-                            {/* {
-                                profileToggle?<RxCross2 className="text-white size-[2vmax]"/>:<FiAlignJustify className="text-white size-[2vmax]"/>} */}
-                        </div>
-                    </NavLink>
+                    {
+                        location.pathname=='/profile'?
+                        <Logout />
+                        :<NavLink to="/login">
+                            <div className="p-[.7vmax] gap-2 rounded-[1vmax] bg-[#6d6d6d86] flex flex-row hover: cursor-pointer  hover:bg-[#ffffff69] hover: transition duration-300" onClick={()=>setProfileToggle(!profileToggle)}>
+                                <LuUserCircle2 className="text-white size-[2vmax]"/> 
+                            </div>
+                        </NavLink>
+                    }
+                    
                 </div>
 
             </div>
@@ -51,5 +57,25 @@ const Nav=()=>{
     )
 }
 
+export const Logout=()=>{
+
+    const navigate=useNavigate()
+    const handleLogout=async()=>{
+        await axios.get(import.meta.env.VITE_BACKEND_DATABASE+'/logout',
+        { withCredentials: true })
+        .then((res)=>{
+            console.log(res.data)
+            navigate("/login")
+        })
+        .catch((err)=>{
+            console.log("Some thing went wrong while logging out")
+        })
+    }
+    return(
+        <>
+            <button className='text-zinc-50 bg-[#ce284c] rounded-sm px-[1vmax] font-medium text-[1.1vmax] hover:bg-[#a72843] hover:text-[#fcbbdb]' onClick={handleLogout}>Logout</button>
+        </>
+    )
+}
 
 export default Nav
