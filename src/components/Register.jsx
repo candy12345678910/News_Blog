@@ -24,7 +24,7 @@ function Register() {
             
             if(res.status==200){
                 console.log(res.data)
-                navigate("/profile", {state:{ email: email, name: name }})
+                navigate("/profile")
             }
             else{
                 console.log(res.data)
@@ -63,7 +63,7 @@ function Register() {
                 </form>
             </div>
             <p className='text-zinc-50 text-[1vmax] hover:cursor-pointer'>Already an User? <span className='text-customLiteBlue font-medium' onClick={()=>navigate("/login")}>Login</span></p>
-            <button className='text-zinc-50 px-[1vmax] py-[.3vmax] font-medium text-[1.3vmax] bg-[#233c91] rounded-md hover:bg-[#111d47] hover:text-[#9daedb]'>Go to Home</button>
+            <button className='text-zinc-50 px-[1vmax] py-[.3vmax] font-medium text-[1.3vmax] bg-[#233c91] rounded-md hover:bg-[#111d47] hover:text-[#9daedb]' onClick={()=>navigate("/")}>Go to Home</button>
         </div>
         </>
     )

@@ -60,7 +60,7 @@ const News=()=>{
         {
             headlines?
 
-            <div className="flex flex-col gap-6 items-center bg-[#c4cde4] h-[auto] pt-[1vmax] pb-[5vmax] overflow-hidden">
+            <div className="flex flex-col gap-6 items-center bg-[#c4cde4] min-h-screen pt-[1vmax] pb-[5vmax] overflow-hidden">
 
                 {/* <Head Data={ headlines } colour={ colour } /> */}
                 {

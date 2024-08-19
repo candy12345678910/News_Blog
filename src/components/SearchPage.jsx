@@ -53,7 +53,7 @@ const SearchPage = () => {
 
     return (
         <>
-            <div className="flex flex-col gap-4 bg-liteBack h-[auto] p-[2vmax] overflow-hidden bor">
+            <div className="flex flex-col gap-4 bg-liteBack min-h-screen p-[2vmax] overflow-hidden bor">
                 {
                     news.map((data, _)=><Card key={_} data={ data }/>)
                 }

@@ -13,7 +13,7 @@ const Nav=()=>{
     const location=useLocation()
 
     const [searchToggle, setSearchToggle]=useState(false)
-    const [profileToggle, setProfileToggle]=useState(false)
+    // const [profileToggle, setProfileToggle]=useState(false)
     return(
         <>
             <div className="flex flex-row py-[.8vmax] px-[3vmax] bg-darkBack justify-between items-center">
@@ -40,7 +40,7 @@ const Nav=()=>{
                         location.pathname=='/profile'?
                         <Logout />
                         :<NavLink to="/login">
-                            <div className="p-[.7vmax] gap-2 rounded-[1vmax] bg-[#6d6d6d86] flex flex-row hover: cursor-pointer  hover:bg-[#ffffff69] hover: transition duration-300" onClick={()=>setProfileToggle(!profileToggle)}>
+                            <div className="p-[.7vmax] gap-2 rounded-[1vmax] bg-[#6d6d6d86] flex flex-row hover: cursor-pointer  hover:bg-[#ffffff69] hover: transition duration-300">
                                 <LuUserCircle2 className="text-white size-[2vmax]"/> 
                             </div>
                         </NavLink>
