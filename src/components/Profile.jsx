@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { LuUserCircle2 } from "react-icons/lu";
 import { BiSolidErrorAlt } from "react-icons/bi";
 import axios from "axios"
 import Loader from './Loader'
+import UserPost from './UserPost';
 
 function Profile() {
     const navigate=useNavigate()
     const [name, setName]=useState(null)
     const [email, setEmail]=useState(null)
-    const [post, setPost]=useState(null)
+    const [post, setPost]=useState('')
     const [title, setTitle]=useState('')
-    const [content, setContent]=useState('')
+    const [content, setContent]=useState(null)
     const [error, setError]=useState(0)
+    const [change, setChange]=useState(1)
+
     useEffect(()=>{
+        
+        // console.log("Hello")
+
         const fetchData=async ()=>{
             try{
                 const data=await axios.get(import.meta.env.VITE_BACKEND_DATABASE+'/profile',{withCredentials: true})
-                // console.log(data)
+                // console.log(userPost)
+
                 if(data.status==201){
                     navigate("/login")
                 }
-
                 const { email, name, post }=data.data
+
                 setName(name)
                 setEmail(email)
                 setPost(post)
@@ -39,14 +47,26 @@ function Profile() {
         setContent('')
     }
     const handlePost=async()=>{
-        await axios.post(import.meta.env.VITE_BACKEND_POST_DATABASE+'/create',{
-            email,
-            title,
-            content
-        },{withCredentials: true})
-        .then(res=>console.log(res.data))
-        .catch(err=>console.log(err))
+        if(content!='' && title!=''){
+            await axios.post(import.meta.env.VITE_BACKEND_POST_DATABASE+'/create',{
+                email,
+                title,
+                content
+            },{withCredentials: true})
+            .then(res=>{
+                toast.success('Post created successfully!')
+                setChange(!change)
+            })
+            .catch(err=>{
+                console.log(err)
+                toast.error("This didn't work.")
+            })
+        }
+        else{
+            toast.error("Title or Content field is empty")        
+        }
     }
+
     if(error){
         return(
             <>
@@ -62,9 +82,15 @@ function Profile() {
     }
     return (    
         <>
+            <Toaster
+            position="top-center"
+            reverseOrder={false}
+            />
+
             <div className='bg-[#111725] min-h-screen p-[3vmax] flex flex-col gap-4'>
                 <div className='flex flex-row gap-5 items-center'>
-                    <LuUserCircle2 className='p-[1.3max] text-[#eaf3ff] bg-slate-400 rounded-full text-[8vmax]'/>
+                    {/* <LuUserCircle2 className='p-[1.3max] text-[#eaf3ff] bg-slate-400 rounded-full text-[8vmax]'/> */}
+                    <img src="https://www.shutterstock.com/image-vector/cute-panda-cartoon-isolated-on-600nw-2371081785.jpg" className='p-[1.3max] rounded-full h-[8vmax]'/>
                     <div>
                         <p className='text-zinc-50 font-medium text-[2.5vmax]'>{name}</p>
                         <p className='text-zinc-50 font-medium text-[1.5vmax]'>{email}</p>
@@ -88,26 +114,12 @@ function Profile() {
                 <p className='text-zinc-50 font-medium text-[2vmax] mx-auto pb-[1vmax]'>Your Posts</p>
                 {
                     !post.length?<p className='text-zinc-50 text-[1.2vmax] mx-auto'>No post yet</p>:
-                    <PostCard/>
+                    <UserPost email={email} change={change}/>
                 }
             </div>
         
         </>
   )
-}
-
-export const PostCard=()=>{
-    return(
-        <>
-            <div className='bg-[#020411] rounded-md flex flex-col'>
-                <p className='px-[1.3vmax] h-auto w-auto bg-[#05081bd5] rounded-md text-[1.6vmax] text-zinc-50'>Lorem Ipsum🤑</p>
-                <p className='p-[1.3vmax] h-auto w-auto bg-[#05081bd5] rounded-md text-[1.2vmax] text-[#d4d4d4e3]'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt sed consequatur eius sint. Eos fugit ducimus, commodi incidunt accusantium ab et neque blanditiis quo laudantium alias ullam, architecto obcaecati necessitatibus vitae nihil officiis omnis hic consequatur reiciendis voluptatibus cupiditate.
-                </p>    
-                <button className='text-zinc-50 px-[1.6vmax] text-[1.3vmax] mb-6 m-auto'>Delete post</button>
-            </div>
-        </>
-    )
 }
 
 export default Profile

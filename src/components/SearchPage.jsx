@@ -15,7 +15,7 @@ const SearchPage = () => {
         const fetchAPI=async ()=>{
             try{
                 const data=await axios(link)
-                console.log(data.data.articles)
+                // console.log(data.data.articles)
                 setNews(data.data.articles)
             }
             catch(err){

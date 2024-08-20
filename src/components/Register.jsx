@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios"
 
 function Register() {
     const navigate=useNavigate()
     const [hide, setHide]=useState(1)
-    const [msg, setMsg]=useState(0)
 
     const [name,setName]=useState('')
     const [email,setEmail]=useState('')
@@ -23,20 +23,25 @@ function Register() {
             },{ withCredentials: true })
             
             if(res.status==200){
-                console.log(res.data)
+                // console.log(res.data)
                 navigate("/profile")
             }
             else{
-                console.log(res.data)
-                setMsg(1)
+                // console.log(res.data)
+                toast.error('Email already present')
             }
         }catch(err){
             console.log("Error occured "+err)
+            toast.error('Registration failed')
         }
     }
 
     return (
         <>
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+        />
         <div className='bg-[#111725] h-screen flex flex-col gap-3 justify-center items-center'>
             
             <p className='text-[2.3vmax] font-medium text-[white]'>Register</p>
@@ -49,8 +54,7 @@ function Register() {
                         <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type="text" placeholder='Name' name="Name" onChange={(e)=>setName(e.target.value)}/>
 
                         <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type="text" placeholder='Email' name="email" onChange={(e)=>setEmail(e.target.value)}/>
-                        <p className='text-[#ff3131] text-[1.2vmax]' style={{display: msg?"block":"none"}}>Email Already exist</p>
-                        
+                                
                         <div className='flex flex-row items-center gap-1'>
                             <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type={hide?"password":"text"} placeholder='Password' name="password" onChange={(e)=>setPassword(e.target.value)}/>
                             <p className="text-[1.3vmax] text-zinc-50" onClick={()=>setHide(!hide)}>{hide?<BiSolidHide/>:<BiSolidShow/>}</p>

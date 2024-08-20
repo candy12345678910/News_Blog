@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios"
 import { BiSolidShow } from "react-icons/bi";
 import { BiSolidHide } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
+
 import Loader from './Loader'
 
 
@@ -12,9 +14,6 @@ function Login() {
     const [hide, setHide]=useState(1)
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
-    const [emailmsg, setEmailmsg]=useState(0)
-    const [passmsg, setPassmsg]=useState(0)
-
     
     useEffect(()=>{
         const profile=async ()=>{
@@ -46,12 +45,10 @@ function Login() {
                 navigate("/profile")
             }
             else if(res.status==201){
-                setEmailmsg(1)
-                setPassmsg(0)
+                toast.error("Account does't exist")
             }
             else if(res.status==202){
-                setEmailmsg(0)
-                setPassmsg(1)
+                toast.error("Wrong password")
             }
         })
         .catch(err=>console.log("Error occured while login in: "+err))
@@ -59,6 +56,10 @@ function Login() {
 
     return (
         <>
+        <Toaster
+            position="top-center"
+            reverseOrder={false}
+        />
         <div className='bg-[#111725] h-screen flex flex-col gap-3 justify-center items-center'>
             
             <p className='text-[2.3vmax] font-medium text-[white]'>Login</p>
@@ -68,13 +69,12 @@ function Login() {
 
                 <form method='post' className="w-full flex flex-col gap-5 p-[3vmax]" onSubmit={handelLogin}>
                         <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type="text" placeholder='Email' name="email" onChange={(e)=>setEmail(e.target.value)}/>
-                        <p className='text-[#ff3131] text-[1.2vmax]' style={{display: emailmsg?"block":"none"}}>No such account</p>
-
+                        
                         <div className='flex flex-row items-center gap-1'>
                             <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type={hide?"password":"text"} placeholder='Password' name="password" onChange={(e)=>setPassword(e.target.value)}/>
                             <p className="text-[1.3vmax] text-zinc-50" onClick={()=>setHide(!hide)}>{hide?<BiSolidHide/>:<BiSolidShow/>}</p>
                         </div>
-                        <p className='text-[#ff3131] text-[1.2vmax]' style={{display: passmsg?"block":"none"}}>Wrong password</p>
+                       
                 <button className='transition duration-375 w-full text-[#ffffff] text-[1.3vmax] font-medium px-[1.1vmax] py-[.5vmax] bg-[#233c91] rounded-md hover:bg-[#1c3074] hover:text-[#9daedb]'>Login</button>
                 
                 </form>

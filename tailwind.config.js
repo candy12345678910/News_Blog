@@ -22,6 +22,9 @@ export default {
         customCardYellow: "#f7db3e",
         customCardOrange: "#f7973e",
 
+        logoutLite: "#ce284c",
+        logoutDark: "#a72843",
+
 
       }
     },

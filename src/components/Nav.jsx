@@ -73,7 +73,7 @@ export const Logout=()=>{
     }
     return(
         <>
-            <button className='text-zinc-50 bg-[#ce284c] rounded-sm px-[1vmax] font-medium text-[1.1vmax] hover:bg-[#a72843] hover:text-[#fcbbdb]' onClick={handleLogout}>Logout</button>
+            <button className='text-zinc-50 bg-logoutLite rounded-sm px-[1vmax] font-medium text-[1.1vmax] hover:bg-logoutDark hover:text-[#fcbbdb]' onClick={handleLogout}>Logout</button>
         </>
     )
 }
