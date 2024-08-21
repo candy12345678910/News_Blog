@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useForm } from "react-hook-form"
 import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios"
 import { BiSolidShow } from "react-icons/bi";
@@ -10,6 +11,13 @@ import Loader from './Loader'
 
 function Login() {
     
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } = useForm()
+
     const navigate=useNavigate()
     const [hide, setHide]=useState(1)
     const [email, setEmail]=useState('')
@@ -34,6 +42,7 @@ function Login() {
         profile()
     },[])
 
+    //User Login handle function
     const handelLogin=async(e)=>{
         e.preventDefault()
         await axios.post(import.meta.env.VITE_BACKEND_DATABASE+'/login',{
@@ -54,6 +63,10 @@ function Login() {
         .catch(err=>console.log("Error occured while login in: "+err))
     }
 
+    const handelAdminLogin=async(e)=>{
+        e.preventDefault()
+        
+    }
     return (
         <>
         <Toaster
@@ -67,7 +80,7 @@ function Login() {
             <div className='overflow-hidden w-[50vw] h-auto bg-[#02030e57] rounded-md flex flex-row gap-5 justify-center items-center'>
                 <img className="hidden md:block w-[25%] h-[100%] " src="https://images.pexels.com/photos/1106476/pexels-photo-1106476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="profile"/>
 
-                <form method='post' className="w-full flex flex-col gap-5 p-[3vmax]" onSubmit={handelLogin}>
+                <form method='post' className="w-full flex flex-col gap-2 md:gap-5 p-[3vmax]">
                         <input className='p-[.3vmax] w-full bg-transparent border-2 border-zinc-800 rounded-md outline-none text-zinc-50 text-[1.3vmax]' type="text" placeholder='Email' name="email" onChange={(e)=>setEmail(e.target.value)}/>
                         
                         <div className='flex flex-row items-center gap-1'>
@@ -75,13 +88,16 @@ function Login() {
                             <p className="text-[1.3vmax] text-zinc-50" onClick={()=>setHide(!hide)}>{hide?<BiSolidHide/>:<BiSolidShow/>}</p>
                         </div>
                        
-                <button className='transition duration-375 w-full text-[#ffffff] text-[1.3vmax] font-medium px-[1.1vmax] py-[.5vmax] bg-[#233c91] rounded-md hover:bg-[#1c3074] hover:text-[#9daedb]'>Login</button>
+                <button className='transition duration-375 w-full text-[#ffffff] text-[1.3vmax] font-medium px-[1.1vmax] py-[.5vmax] bg-[#233c91] rounded-md hover:bg-[#1c3074] hover:text-[#9daedb]' onClick={handelLogin}>User Login</button>
                 
+                {/* <button className='transition duration-375 w-full text-[#ffffff] text-[1.3vmax] font-medium px-[1.1vmax] py-[.5vmax] bg-[#23916c] rounded-md hover:bg-[#1c7461] hover:text-[#9ddbdb]' onClick={handelAdminLogin}>Admin Login</button> */}
+
                 </form>
 
 
             </div>
                 <p className='text-zinc-50 text-[1vmax] hover:cursor-pointer'>Not an User? <span className='text-customLiteBlue font-medium' onClick={()=>navigate("/register")}>Register</span></p>
+                {/* <p className='text-customLiteBlue font-medium' onClick={()=>navigate("/admin")}>Admin Login</p> */}
                 <button className='text-zinc-50 px-[1vmax] py-[.3vmax] font-medium text-[1.3vmax] bg-[#233c91] rounded-md hover:bg-[#1c3074] hover:text-[#9daedb]' onClick={()=>navigate("/")}>Go to Home</button>
         </div>
         </>

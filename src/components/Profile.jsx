@@ -12,6 +12,7 @@ function Profile() {
     const [name, setName]=useState(null)
     const [email, setEmail]=useState(null)
     const [post, setPost]=useState('')
+    const [img, setImg]=useState(null)
     const [title, setTitle]=useState('')
     const [content, setContent]=useState(null)
     const [error, setError]=useState(0)
@@ -29,11 +30,12 @@ function Profile() {
                 if(data.status==201){
                     navigate("/login")
                 }
-                const { email, name, post }=data.data
+                const { email, name, post, img }=data.data
 
                 setName(name)
                 setEmail(email)
                 setPost(post)
+                setImg(img)
             }
             catch(err){
                 console.log("Error occured while fetching from profile: "+err)
@@ -88,15 +90,15 @@ function Profile() {
             />
 
             <div className='bg-[#111725] min-h-screen p-[3vmax] flex flex-col gap-4'>
-                <div className='flex flex-row gap-5 items-center'>
+                <div className='flex flex-row gap-5 items-center pb-[1vmax] md:pb-[3vmax]'>
                     {/* <LuUserCircle2 className='p-[1.3max] text-[#eaf3ff] bg-slate-400 rounded-full text-[8vmax]'/> */}
-                    <img src="https://www.shutterstock.com/image-vector/cute-panda-cartoon-isolated-on-600nw-2371081785.jpg" className='p-[1.3max] rounded-full h-[8vmax]'/>
+                    {/* <img src="https://www.shutterstock.com/image-vector/cute-panda-cartoon-isolated-on-600nw-2371081785.jpg" className='p-[1.3max] rounded-full h-[8vmax]'/> */}
+                    <img src={img} className='w-10 h-10 sm:w-16 sm:h-16 md:w-32 md:h-32 rounded-full object-cover' alt='Profile' />
                     <div>
                         <p className='text-zinc-50 font-medium text-[2.5vmax]'>{name}</p>
                         <p className='text-zinc-50 font-medium text-[1.5vmax]'>{email}</p>
                     </div>
                 </div>
-                <br/>
                 <p className='text-zinc-50 font-medium text-[2vmax]'>Create a new post</p>
                 
                 <div className='flex flex-col justify-center items-start gap-2'>

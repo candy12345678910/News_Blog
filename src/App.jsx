@@ -2,12 +2,14 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav"
 import Footer from "./components/Footer";
+import Admin from "./components/Admin";
 import News from "./components/News";
 import Blog from "./components/Blog";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import SearchPage from "./components/SearchPage";
 import Profile from "./components/Profile";
+import ErrorPage from "./components/ErrorPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -25,6 +27,8 @@ const App=()=>{
         </Route>
         <Route path="/login" element={ <Login /> }/>
         <Route path="/register" element={ <Register /> }/>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/*" element={<ErrorPage/>}/>
       </Routes>
       <Footer/>
       

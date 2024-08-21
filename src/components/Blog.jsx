@@ -12,12 +12,13 @@ function Blog() {
   useEffect(()=>{
     const fetchData=async()=>{
       try{
+        // console.log("Blog.jsx element")
         const data=await axios.get(import.meta.env.VITE_BACKEND_POST_DATABASE+"/allpost")
         setData(data.data)
         // console.log(data.data)
       }
       catch(err){
-        console.log(err)
+        console.log("Error fetching blogs: "+err)
         return(
           <>
               <div className='flex flex-col bg-liteBack h-[100vh] gap-6 justify-center items-center p-[3max] '>
