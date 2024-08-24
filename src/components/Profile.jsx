@@ -20,7 +20,7 @@ function Profile() {
 
     useEffect(()=>{
         
-        // console.log("Hello")
+        // console.log("Profile useEffect")
 
         const fetchData=async ()=>{
             try{
@@ -43,11 +43,13 @@ function Profile() {
             }
         }
         fetchData()
-    },[])
+    },[change])
+
     const handleClearPost=()=>{
         setTitle('')
         setContent('')
     }
+    
     const handlePost=async()=>{
         if(content!='' && title!=''){
             await axios.post(import.meta.env.VITE_BACKEND_POST_DATABASE+'/create',{
