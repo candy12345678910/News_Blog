@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from "./Loader"
 import { FaUser } from "react-icons/fa";
 import { FaBloggerB } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { FaUserAltSlash } from "react-icons/fa";
+import { PiWarningCircleLight } from "react-icons/pi";
 
-const Admin = () => {
+const Admin = ({setGotoAdmin}) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [button, setButton] = useState(1)
-    // const [totalUser, setTotalUser]=useState(null)
-    // const [totalPost, setTotalPost]=useState(null)
     const [reloadUser, setReloadUser]=useState(1)
     const [reloadPost, setReloadPost]=useState(1)
     const [user, setUser] = useState(null)
     const [post, setPost] = useState(null)
+    const [del, setDel] = useState(null)
 
     const getALLData=async()=>{
         try{
-            const [ user, post ]=await Promise.all([
+            const [ user, post, del ]=await Promise.all([
                 axios.get(import.meta.env.VITE_BACKEND_POST_DATABASE+'/alluser'),
-                axios.get(import.meta.env.VITE_BACKEND_POST_DATABASE+'/allpost')
+                axios.get(import.meta.env.VITE_BACKEND_POST_DATABASE+'/allpost'),
+                axios.get(import.meta.env.VITE_BACKEND_ADMIN+'/delete-detail')
             ]
             )
             setUser(user.data)
             setPost(post.data)
+            setDel(del.data)
             // console.log(user.data)
-            // console.log(post.data)
+            // console.log(del.data)
         }
         catch(err){
             console.log("Error Admin client when all data is fetched: "+err)
@@ -62,11 +65,13 @@ const Admin = () => {
                 position="top-center"
                 reverseOrder={false}
             />
-            <div className='bg-[#080e25] min-h-screen flex flex-col gap-3 justify-start items-center pb-14'>
+            <div className='bg-[#080e25] min-h-screen flex flex-col gap-3 justify-start items-center pb-14 relative'>
+                
                 {/* Simple nav */}
-                <div className='flex- flex-row justify-between items-center p-[1.5vmax] bg-[#101746] w-full'>
-                    <p className='text-zinc-50 text-[1.5vmax] font-semibold'>Hello Admin</p>
-                    <p></p>
+                <div className='flex flex-row justify-between items-center py-[1vmax] px-[3vmax] bg-[#101746] w-full'>
+                    <p className='text-zinc-50 text-[1.7vmax] font-semibold'>Admin <span className='text-customLiteBlue'>Dashboard</span></p>
+
+                    <button className='text-zinc-50 bg-logoutLite rounded-sm p-[.8vmax] font-medium text-[1.1vmax] hover:bg-logoutDark hover:text-[#fcbbdb]' onClick={()=>setGotoAdmin(false)}>Logout</button>
                 </div>
 
                 {/* user, post, deleted user, seleted post cards */}
@@ -99,7 +104,7 @@ const Admin = () => {
                         </div>
                         <div className='flex flex-col'>
                             <p className='text-zinc-50 font-semibold text-[.9vmax] md:text-[1.4vmax]'>Deleted User</p>
-                            <p className='text-[#badaff] font-semibold text-[.9vmax] md:text-[1.2vmax]'>2000</p>
+                            <p className='text-[#badaff] font-semibold text-[.9vmax] md:text-[1.2vmax]'>{del.deletedUser}</p>
                         </div>
                     </div>
 
@@ -109,20 +114,22 @@ const Admin = () => {
                         </div>
                         <div className='flex flex-col'>
                             <p className='text-zinc-50 font-semibold text-[.9vmax] md:text-[1.4vmax]'>Deleted Post</p>
-                            <p className='text-[#badaff] font-semibold text-[.9vmax] md:text-[1.2vmax]'>2000</p>
+                            <p className='text-[#badaff] font-semibold text-[.9vmax] md:text-[1.2vmax]'>{del.deletedPost
+}</p>
                         </div>
                     </div>
 
                 </div>
 
-                <br />
+                {/* <br /> */}
+                <div className='h-[.2vmax] w-[90vw] bg-[#15193f] my-[3vmax]' />
 
                 {/* user and posts button */}
                 <div className='flex flex-row gap-2 w-[75vw] items-center justify-center'>
 
-                    <button className={`p-[.6vmax] text-[.99vmax] md:text-[1.3vmax] ${button ? 'bg-[#3f5aa5]' : 'bg-[#263663]'} w-[50%] rounded-md ${button ? 'text-zinc-50' : 'text-[#bddcff]'} font-semibold`} onClick={() => setButton(!button)}>User</button>
+                    <button className={`p-[.6vmax] text-[.99vmax] md:text-[1.3vmax] ${button ? 'bg-[#3f5aa5]' : 'bg-[#263663]'} w-[50%] rounded-sm md:rounded-md ${button ? 'text-zinc-50' : 'text-[#bddcff]'} font-semibold`} onClick={() => setButton(!button)}>User</button>
 
-                    <button className={`p-[.6vmax] text-[.99vmax] md:text-[1.3vmax] ${!button ? 'bg-[#3f5aa5]' : 'bg-[#263663]'} w-[50%] rounded-md ${!button ? 'text-zinc-50' : 'text-[#bddcff]'} font-semibold`} onClick={() => setButton(!button)}>Posts</button>
+                    <button className={`p-[.6vmax] text-[.99vmax] md:text-[1.3vmax] ${!button ? 'bg-[#3f5aa5]' : 'bg-[#263663]'} w-[50%] rounded-sm rounded-md ${!button ? 'text-zinc-50' : 'text-[#bddcff]'} font-semibold`} onClick={() => setButton(!button)}>Posts</button>
 
                 </div>
 
@@ -149,7 +156,7 @@ const Admin = () => {
                         }
                     </div>:
                     <div className='p-[1vmax] h-auto flex flex-col gap-3 bg-[#16214b] w-[75vw] rounded-md'>
-                        <p className='text-zinc-50 m-auto text-[1.3vmax]'>Post is empty</p>
+                        <p className='text-zinc-50 m-auto text-[1.3vmax]'>No posts</p>
                     </div>
                     :<></>
                     
@@ -170,6 +177,23 @@ const Admin = () => {
                 <div className='flex flex-col gap-3 w-[70vw] h-auto rounded-md bg-[#879bcc4f] py-[1.6vmax] px-[1vmax] overflow-hidden'>
                     <AdminCard/>
                     <AdminCard/>
+                </div> */}
+
+
+                {/* Confirm Delete */}
+                
+                {/* <div className='min-h-screen w-full bg-[#00000060] absolute flex justify-center items-center backdrop-blur-sm'>
+                    <div className='bg-[#f3f5ff] w-[50%] sm:w-[30%] px-[3vmax] py-[1vmax] rounded-md flex flex-col gap-3 items-center justify-center'>
+                        <PiWarningCircleLight className='text-[10vmin]'/>
+                        <p className='text-[1.3vmax]'>Are you sure?</p>
+
+                        <div className='flex flex-row gap-2 w-full'>
+                            <button className='text-zinc-50 w-[50%] bg-customLiteBlue rounded-sm p-[.6vmax] font-medium text-[1.1vmax] hover:bg-customDarkBlue hover:text-[#ffffff]'>Yes</button>
+
+                            <button className='text-zinc-50 w-[50%] bg-logoutLite rounded-sm p-[.6vmax] font-medium text-[1.1vmax] hover:bg-logoutDark hover:text-[#ffffff]'>No</button>
+                        </div>
+
+                    </div>
                 </div> */}
 
 
@@ -212,8 +236,8 @@ export const UserCard = ({Data, reloadUser, setReloadUser}) => {
 
     return (
         <>
-            <div className='flex flex-wrap sm:flex-row gap-2 p-[.6vmax] rounded-md bg-[#303d69] justify-between items-center overflow-hidden'>
-                <div className='flex flex-row gap-1 sm:gap-3 items-center'>
+            <div className='flex flex-wrap sm:flex-row gap-2 px-[1vmax] py-[.6vmax] rounded-md bg-[#303d69] justify-between items-center overflow-hidden'>
+                <div className='flex flex-row gap-1 w-[40%] sm:gap-3 items-center'>
                     <img className="h-5 w-5 sm:h-5 sm:w-7 md:h-12 md:w-12 rounded-full object-cover" src={Data.img} alt='user' />
 
                     <p className='h-auto w-auto font-semibold text-[.9vmax] md:text-[1.2vmax] p-[.4vmax] text-zinc-50'>
@@ -224,10 +248,10 @@ export const UserCard = ({Data, reloadUser, setReloadUser}) => {
                         {Data.email}
                     </p>
 
+                </div>
                     <p className='h-auto w-auto font-semibold text-[.9vmax] md:text-[1.2vmax] p-[.4vmax] text-zinc-50'>
                         {`Post: ${Data.post.length}`}
                     </p>
-                </div>
                 {/* <div className='flex flex-row gap-5'> */}
 
                 <button className='m-0 w-[100%] sm:w-auto md:m-0 p-[.5vmax] rounded-md text-zinc-50 font-semibold text-[.9vmax] md:text-[1.2vmax] bg-logoutLite hover:bg-logoutDark hover:cursor-pointer' onClick={handleDleteUser}>Remove</button>
@@ -245,7 +269,7 @@ export const PostCard = ({Data, reloadPost, setReloadPost}) => {
     const handleDletePost=async()=>{
         // console.log(Data._id, Data.email)
         try{
-            await axios.post(import.meta.env.VITE_BACKEND_POST_DATABASE+'/delete',{
+            await axios.post(import.meta.env.VITE_BACKEND_ADMIN+'/delete/post',{
                 _id: Data._id,
                 email: Data.email
             },{withCredentials: true})

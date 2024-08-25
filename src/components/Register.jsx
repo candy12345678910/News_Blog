@@ -25,9 +25,12 @@ function Register() {
     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
     imageURL[Math.ceil(Math.random()*imageURL.length-1)]
 
-    function validatePassword(password) {
-        const messages = [];
-        
+    // Password validation
+    function validatePassword() {
+        if(password!=conf){
+            toast.error("Confirm password doesn't match")
+            return true
+        }
         if (password.length < 8) {
             toast.error("Your password must be at least 8 characters long.");
             return true
@@ -44,11 +47,8 @@ function Register() {
             toast.error("Your password must include at least one special character (e.g., !@#$%^&*).");
             return true
         }
-        if(password!=conf){
-            toast.error("Confirm password doesn't match")
-            return true
-        }
     }
+    
     // Handle OTP send
     const handleOtpSend=async(e)=>{
         e.preventDefault()
@@ -56,7 +56,7 @@ function Register() {
             toast.error("Email format is wrong")
             return
         }
-        if(validatePassword(password)) return
+        if(validatePassword()) return
 
         setCancel(1)
         try{
@@ -129,6 +129,7 @@ function Register() {
         />
         <div className='bg-[#111725] h-screen flex flex-col gap-3 justify-center items-center relative'>
             
+            {/* OTP checking area */}
             {
                 cancel?
                 <div className='bg-[#01030cd0] min-h-screen w-full absolute flex items-center justify-center backdrop-blur-sm'>

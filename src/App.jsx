@@ -2,8 +2,9 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav"
 import Footer from "./components/Footer";
-import Admin from "./components/Admin";
+import AdminLogin from "./components/AdminLogin";
 import News from "./components/News";
+import ForgetPassword from "./components/ForgetPassword";
 import Blog from "./components/Blog";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -26,9 +27,9 @@ const App=()=>{
           <Route path="/profile" element={ <Profile /> }/>
         </Route>
         <Route path="/login" element={ <Login /> }/>
-        <Route path="/adminlogin" element={ <Login /> }/>
+        <Route path="/user/login/forgot-password" element={<ForgetPassword />}/>
+        <Route path="/login/admin" element={ <AdminLogin /> }/>
         <Route path="/register" element={ <Register /> }/>
-        <Route path="/admin" element={<Admin />} />
         <Route path="/*" element={<ErrorPage/>}/>
       </Routes>
       <Footer/>

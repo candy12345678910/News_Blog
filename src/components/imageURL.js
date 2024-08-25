@@ -12,4 +12,10 @@ export const imageURL=[
     "https://images.playground.com/c163e11038b440cb920b33908b2c0211.jpeg",
     "https://t4.ftcdn.net/jpg/06/30/23/57/360_F_630235782_v61RF6k1SFUxzOhqzor0GTTmlllMLv3R.jpg",
     "https://cdn.pixabay.com/photo/2023/10/16/18/06/ai-generated-8319814_1280.png",
+    "https://img.freepik.com/free-photo/3d-animated-cartoon-lion_23-2150800715.jpg",
+    "https://img.freepik.com/free-photo/view-3d-animated-cartoon-ferocious-lion-cub_23-2150800575.jpg",
+    "https://cdn.dribbble.com/userupload/12876922/file/original-87947ceb3cba1ee7980674944d184200.jpg?resize=752x",
+    "https://img.freepik.com/free-photo/view-3d-bird-with-book_23-2150946409.jpg",
+    "https://img.freepik.com/free-photo/view-3d-aviator-bird_23-2150946577.jpg",
+    "https://img.freepik.com/premium-photo/very-detailed-cute-bird-generate-ai_868783-2739.jpg"
 ]

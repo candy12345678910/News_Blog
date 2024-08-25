@@ -20,11 +20,11 @@ const BlogCard=({Data})=>{
           <div className='flex flex-row gap-1 bg-[#060a24d5] items-center'>
             <div className='flex flex-row gap-1 px-[1.3vmax] py-[.5vmax] items-center'>
               <img className="h-5 w-5 sm:h-7 sm:w-7 md:h-12 md:w-12 rounded-full object-cover" src={Data.img} alt='user'/>
-              <p className='h-auto w-auto text-[1.2vmax] p-[.4vmax] text-zinc-50'>
-                {Data.name}
+              <p className='h-auto w-auto text-[1.2vmax] p-[.4vmax] text-[#cad8ff]'>
+                @{Data.name}
               </p>
             </div>
-            <p className='py-[.5vmax] h-auto w-auto text-[.9vmax] p-[.4vmax] text-zinc-50'>
+            <p className='py-[.5vmax] h-auto w-auto text-[.9vmax] p-[.4vmax] text-[#cad8ff]'>
             {`Posted on: ${monthShortNames[month]}-${day}-${year}`} 
             </p>  
           </div>
