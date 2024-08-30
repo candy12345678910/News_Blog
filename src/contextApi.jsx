@@ -65,6 +65,19 @@ export const ContextPorovider=({ children })=>{
 
     // }
 
+    const check =async() =>{
+        await axios.get('https://newsblogserver-production.up.railway.app/api/fetch/headlines')
+        .then(res=>console.log(res))
+        .catch(err=>console.log("Error occured while fetching from deployed server: "+err))
+        // axios.get('https://newsblogserver-production.up.railway.app/api/fetch/headlines')
+        // .then(response => {
+        //     console.log(response.data);
+        // })
+        // .catch(error => {
+        //     console.error('Error fetching headlines:', error);
+        // });
+
+    }
     const fetchAll = async () => {
         const apiEndpoints = [
           'headlines',
@@ -112,6 +125,7 @@ export const ContextPorovider=({ children })=>{
 
 
     useEffect(()=>{
+        check()
         fetchAll()
         // setHeadline(Headline.articles)
     },[])
