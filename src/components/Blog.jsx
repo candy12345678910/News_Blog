@@ -14,8 +14,8 @@ function Blog() {
       try{
         // console.log("Blog.jsx element")
         const data=await axios.get(import.meta.env.VITE_BACKEND_POST_DATABASE+"/allpost")
+        console.log(data)
         setData(data.data)
-        // console.log(data.data)
       }
       catch(err){
         console.log("Error fetching blogs: "+err)

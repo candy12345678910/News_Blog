@@ -32,7 +32,10 @@ function AdminLogin() {
                 toast.error("Wrong password")
             }
         })
-        .catch(err=>console.log("Error occured while login in: "+err))
+        .catch(err=>{
+            toast.error("Something went wrong")
+            console.log("Error occured while login in: "+err)}
+        )
     }
 
     if(gotoadmin){
