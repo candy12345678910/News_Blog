@@ -18,99 +18,97 @@ export const ContextPorovider=({ children })=>{
     const [science, setScience]=useState(null)
     const [technology, setTechnology]=useState(null)
 
-    const fetchAll=()=>{
-        const headlines=import.meta.env.VITE_HEADLINES+import.meta.env.VITE_APIKEY
-        const generalAPI=import.meta.env.VITE_LINK_BUISNESS+"general&apiKey="+import.meta.env.VITE_APIKEY
-        const businessAPI=import.meta.env.VITE_LINK_BUISNESS+"business&apiKey="+import.meta.env.VITE_APIKEY
-        const sportsAPI=import.meta.env.VITE_LINK_BUISNESS+"sports&apiKey="+import.meta.env.VITE_APIKEY
-        const entertainmentAPI=import.meta.env.VITE_LINK_BUISNESS+"entertainment&apiKey="+import.meta.env.VITE_APIKEY
-        const healthAPI=import.meta.env.VITE_LINK_BUISNESS+"health&apiKey="+import.meta.env.VITE_APIKEY
-        const scienceAPI=import.meta.env.VITE_LINK_BUISNESS+"science&apiKey="+import.meta.env.VITE_APIKEY
-        const technologyAPI=import.meta.env.VITE_LINK_BUISNESS+"technology&apiKey="+import.meta.env.VITE_APIKEY
+    // const fetchAll=()=>{
+    //     const headlines=import.meta.env.VITE_HEADLINES+import.meta.env.VITE_APIKEY
+    //     const generalAPI=import.meta.env.VITE_LINK_BUISNESS+"general&apiKey="+import.meta.env.VITE_APIKEY
+    //     const businessAPI=import.meta.env.VITE_LINK_BUISNESS+"business&apiKey="+import.meta.env.VITE_APIKEY
+    //     const sportsAPI=import.meta.env.VITE_LINK_BUISNESS+"sports&apiKey="+import.meta.env.VITE_APIKEY
+    //     const entertainmentAPI=import.meta.env.VITE_LINK_BUISNESS+"entertainment&apiKey="+import.meta.env.VITE_APIKEY
+    //     const healthAPI=import.meta.env.VITE_LINK_BUISNESS+"health&apiKey="+import.meta.env.VITE_APIKEY
+    //     const scienceAPI=import.meta.env.VITE_LINK_BUISNESS+"science&apiKey="+import.meta.env.VITE_APIKEY
+    //     const technologyAPI=import.meta.env.VITE_LINK_BUISNESS+"technology&apiKey="+import.meta.env.VITE_APIKEY
 
-        const zero=axios.get(headlines)
-        const one=axios.get(generalAPI)
-        const two=axios.get(businessAPI)
-        const three=axios.get(sportsAPI)
-        const four=axios.get(entertainmentAPI)
-        const five=axios.get(healthAPI)
-        const six=axios.get(scienceAPI)
-        const seven=axios.get(technologyAPI)
+    //     const zero=axios.get(headlines)
+    //     const one=axios.get(generalAPI)
+    //     const two=axios.get(businessAPI)
+    //     const three=axios.get(sportsAPI)
+    //     const four=axios.get(entertainmentAPI)
+    //     const five=axios.get(healthAPI)
+    //     const six=axios.get(scienceAPI)
+    //     const seven=axios.get(technologyAPI)
         
         
-        axios.all([zero, one, two, three, four, five, six, seven]).then(
-            axios.spread((...data)=>{
-                const zero =data[0].data.articles
-                const one=data[1].data.articles
-                const two=data[2].data.articles
-                const three=data[3].data.articles
-                const four=data[4].data.articles
-                const five=data[5].data.articles
-                const six=data[6].data.articles
-                const seven=data[7].data.articles
+    //     axios.all([zero, one, two, three, four, five, six, seven]).then(
+    //         axios.spread((...data)=>{
+    //             const zero =data[0].data.articles
+    //             const one=data[1].data.articles
+    //             const two=data[2].data.articles
+    //             const three=data[3].data.articles
+    //             const four=data[4].data.articles
+    //             const five=data[5].data.articles
+    //             const six=data[6].data.articles
+    //             const seven=data[7].data.articles
                 
-                setHeadline(zero)
-                setGeneral([ "General", one])
-                setBuisness([ "Buisness", two])
-                setSports([ "Sports", three])
-                setEntertainment([ "Entertainment", four])
-                setHealth([ "Health", five])
-                setScience([ "Science", six])
-                setTechnology([ "Technology", seven])
-            })
-        ).catch(err=>{
-            console.log("Error occured= "+err)
-            setError(true)
-        })
+    //             setHeadline(zero)
+    //             setGeneral([ "General", one])
+    //             setBuisness([ "Buisness", two])
+    //             setSports([ "Sports", three])
+    //             setEntertainment([ "Entertainment", four])
+    //             setHealth([ "Health", five])
+    //             setScience([ "Science", six])
+    //             setTechnology([ "Technology", seven])
+    //         })
+    //     ).catch(err=>{
+    //         console.log("Error occured= "+err)
+    //         setError(true)
+    //     })
 
-    }
+    // }
 
-
-    // const fetchAll = async () => {
-    //     // const apiKey = import.meta.env.VITE_APIKEY;
-    //     const apiEndpoints = [
-    //       'headlines',
-    //       'general',
-    //       'business',
-    //       'sports',
-    //       'entertainment',
-    //       'health',
-    //       'science',
-    //       'technology'
-    //     ];
+    const fetchAll = async () => {
+        const apiEndpoints = [
+          'headlines',
+          'general',
+          'business',
+          'sports',
+          'entertainment',
+          'health',
+          'science',
+          'technology'
+        ];
       
-    //     const fetchApiData = async (category) => {
-    //       return axios.get(import.meta.env.VITE_BACKEND_FETCHAPI_URL+category);
-    //     };
+        const fetchApiData = (category) => {
+          return axios.get(`${import.meta.env.VITE_BACKEND_FETCHAPI_URL}${category}`);
+        };
       
-    //     try {
-    //       const responses = await Promise.all(apiEndpoints.map(fetchApiData));
-    //       const data = responses.map(response => response.data.articles);
+        try {
+          const responses = await Promise.all(apiEndpoints.map(fetchApiData));
+          const data = responses.map(response => response.data.articles);
       
-    //       const [
-    //         headlineData,
-    //         generalData,
-    //         businessData,
-    //         sportsData,
-    //         entertainmentData,
-    //         healthData,
-    //         scienceData,
-    //         technologyData
-    //       ] = data;
+          const [
+            headlineData,
+            generalData,
+            businessData,
+            sportsData,
+            entertainmentData,
+            healthData,
+            scienceData,
+            technologyData
+          ] = data;
+          
+          setHeadline(headlineData);
+          setGeneral(["General", generalData]);
+          setBuisness(["Business", businessData]);
+          setSports(["Sports", sportsData]);
+          setEntertainment(["Entertainment", entertainmentData]);
+          setHealth(["Health", healthData]);
+          setScience(["Science", scienceData]);
+          setTechnology(["Technology", technologyData]);
       
-    //       setHeadline(headlineData);
-    //       setGeneral(["General", generalData]);
-    //       setBuisness(["Business", businessData]);
-    //       setSports(["Sports", sportsData]);
-    //       setEntertainment(["Entertainment", entertainmentData]);
-    //       setHealth(["Health", healthData]);
-    //       setScience(["Science", scienceData]);
-    //       setTechnology(["Technology", technologyData]);
-      
-    //     } catch (error) {
-    //       console.error("Error occurred: ", error);
-    //     }
-    //   };
+        } catch (error) {
+          console.error("Error occurred: ", error);
+        }
+      };
 
 
     useEffect(()=>{
